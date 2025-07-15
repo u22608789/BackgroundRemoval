@@ -6,3 +6,5 @@ onnxruntime
 filetype
 watchdog
 aiohttp
+gradio
+asyncer

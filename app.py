@@ -1,8 +1,10 @@
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import StreamingResponse
-import io, subprocess
+import io
+import subprocess
 
 app = FastAPI(title="Background Removal Service")
+
 
 @app.post("/remove-bg")
 async def remove_bg(file: UploadFile = File(...)):
@@ -11,7 +13,7 @@ async def remove_bg(file: UploadFile = File(...)):
     data = await file.read()
     # spawn rembg CLI
     proc = subprocess.Popen(
-        ["rembg", "i", "--format", "png"],
+        ["rembg", "i"],
         stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE
     )
     out, err = proc.communicate(data)
